@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  matrix-reg-bot:
+    build: .
+    container_name: matrix-reg-bot
+    restart: unless-stopped
+    
+    environment:
+      - TG_BOT_TOKEN=your_token
+      - ADMIN_CHAT_ID=123456789
+      - MATRIX_SERVER_URL=https://matrix.yourdomain.com
+      - MATRIX_DOMAIN=yourdomain.com
+      - MATRIX_BOT_USER=regbot
+      - MATRIX_BOT_PASSWORD=your_password
+      - MATRIX_ADMIN_ROOM_ID=!roomid:yourdomain.com
+      - DB_PATH=/app/data/bot_database.db
+      - LOG_PATH=/app/logs
+      - TELEGRAPH_GUIDE=https://telegra.ph/Matrix-Guide
+    
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./matrix_store:/app/matrix_store
+      - ./messages/messages.yaml:/app/messages/messages.yaml:ro
